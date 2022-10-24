@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CSharpBootcamp
 {
@@ -350,9 +352,295 @@ namespace CSharpBootcamp
                 Console.WriteLine(i.GetType());
             if (i is int)
                 Console.WriteLine(i.GetType());
-            */
-            #endregion
 
+            // && || ! 
+            bool b1 = !(25 < 10);
+            Console.WriteLine(b1);
+            bool b2 = !(10 != 20);
+            Console.WriteLine(b2);
+
+            // =
+            int x;
+            int y;
+            x = x + y; // x += y;
+            x = x * y; // x *= y;
+
+            int x = 5;
+            int y = 10;
+            if (x < y)
+                Console.WriteLine(x);
+            else
+                Console.WriteLine(y);
+
+            // ?
+            Console.WriteLine(!(x < y) ? x : y);
+
+            //new 
+            A a = new A();
+            class A { }
+ 
+             * if, switch
+             * 
+             * for, foreach
+             * while
+             * do while
+             * 
+             * break, continue, goto, return 
+
+            string s;
+            int a, b, c;
+            Console.WriteLine("1. sayısı");
+            s = Console.ReadLine();
+            a = Convert.ToInt32(s);
+            Console.WriteLine("2. sayısı");
+            s = Console.ReadLine();
+            b = Convert.ToInt32(s);
+            Console.WriteLine("3. sayısı");
+            s = Console.ReadLine();
+            c = Convert.ToInt32(s);
+            // Console.WriteLine($"{a} - {b} - {c}");
+            // Console.WriteLine(((a > b) && (a > c)) ? ($"A : {a}") : (b > c) ? ($"B : {b}") : ($"C : {c}"));
+            // Console.WriteLine((a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c));
+
+             int a = 1, b = 2;
+             if(a<b)
+                 Console.WriteLine(a);
+             else
+                 Console.WriteLine(b);
+
+             // switch
+             string s;
+             int a;
+             Console.Write("Kaçinci Sınıf : ");
+             s = Console.ReadLine();
+             a = Convert.ToInt32(s);
+             switch (a)
+             {
+                 case 1: Console.WriteLine("1.Sınıf"); break;
+                 case 2: Console.WriteLine("2.Sınıf"); break;
+                 case 3: Console.WriteLine("3.Sınıf"); break;
+                 case 4: Console.WriteLine("4.Sınıf"); break;
+                 default: Console.WriteLine("Okulu uzatmışsın"); goto case 1;
+             }
+
+             // C# 8.0
+             var result = a switch
+             {
+                 1 => "1.Sınıf",
+                 2 => "2.Sınıf",
+                 3 => "3.Sınıf",
+                 4 => "4.Sınıf",
+                 _ => "Okulu uzatmışsın Kamil"
+             };
+             Console.WriteLine(result);
+
+             var (a, b, operat) = (5, 10, "*");
+             var result = operat switch
+             {
+                 "+" => a + b,
+                 "-" => a - b,
+                 "*" => a * b,
+                 _ => 10 * a * b
+             };
+             Console.WriteLine(result);
+
+             // loops
+             for (; ; )
+                 Console.Write(0);
+             for (int i = 1; i <= 100; i++)
+                 Console.Write(i);
+             int[] c = { 1, 2, 3, 4, 5, 6, 7, 8, 9,10 };
+             for (int i = 1; i < c.Length; i++)
+                 Console.Write(c[i]);
+             
+             int[] c = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 55 };
+             int sum = 0;
+             for (int i = 0; i < c.Length; i++)
+                 sum += c[i];
+             
+             Console.WriteLine(sum);
+             // ödev : girilen sayıya kadar olan değerleri topla
+             
+             int i = 0, sum = 0;
+             while (i < 10)
+             {
+                 i++;
+                 sum += i;
+             }
+             Console.WriteLine(sum);
+             
+             do
+             {
+                 sum += i;
+                 i++;
+             } while (i < 10);
+             Console.WriteLine(sum);
+             
+             int j = 11;
+             do
+             {
+                 Console.WriteLine(j);
+                 j++;
+             } while (j < 10);
+             
+             //foreach
+              List<User> users = new List<User>();
+             users.Add(new User() { Id = 1, Name = "Kamil" });
+             users.Add(new User() { Id = 2, Name = "Ramazan" });
+             
+             foreach (var item in users)
+                 //Console.WriteLine(item.Id + " - " + item.Name + item.GetType().Name);
+                 Console.WriteLine(JsonConvert.SerializeObject(item));
+             class User
+             {
+                 public int Id { get; set; }
+                 public string Name { get; set; }
+             }
+             
+             string[] isimler = { "Kemal", "Elif", "Oğuzhan", "Semih" };
+             for (int i = 0; i < isimler.Length; i++)
+                 Console.WriteLine($"{i + 1}. {isimler[i]}");
+             int j = 0;
+             foreach (var item in isimler)
+             {
+                 Console.WriteLine($"{j + 1}. {item}");
+                 if (j < isimler.Length)
+                     j++;
+             }
+             foreach (var item in isimler.Select((name, index) => (name, index)))
+                 Console.WriteLine($"{item.index}. {item.name}");
+             
+            string[] names =
+            {
+                "Resul",
+                "Kemal Erdem",
+                "Yağmur",
+                "Aytin",
+                "Mücahid",
+                "Beytullah",
+                "Yasin",
+                "Ayaz",
+                "Ahsen",
+                "Halime",
+                "Onur",
+                "Yiğit",
+                "Musa",
+                "Alper Umur",
+                "Emre",
+                "Kemal",
+                "Elif Nur",
+                "Ebru",
+                "Semih",
+                "Eren",
+                "Beytullah",
+                "Can",
+                "Berkcan",
+                "Doğuş",
+                "Ramazan Burak"
+            };
+
+            class User
+            {
+                public int Id { get; set; }
+                public string Name { get; set; }
+            }
+
+            Random random = new Random();
+            int rastgeleSayi = random.Next(1, 17);
+            double rndSayi = random.NextDouble();
+            Console.WriteLine(rastgeleSayi);
+
+            // Arrays
+            string[] str;
+            int[] number = new int[19];
+            object[] obj;
+
+            Console.WriteLine("Dizinin Boyutu : ");
+            int boyut = Convert.ToInt32(Console.ReadLine());
+            bool[] arr = new bool[boyut];
+            for (int i = 0; i < boyut; i++)
+                Console.Write($"{arr[i]} ");
+
+            Random rnd = new Random();
+            int[] dizi = new int[3];
+            dizi[0] = rnd.Next(0, 2);
+            dizi[1] = rnd.Next(0, 3);
+            dizi[2] = rnd.Next(0, 4);
+            foreach (var item in dizi)
+            {
+                Console.WriteLine(item);
+            }
+            for (int i = 0; i < dizi.Length; i++)
+            {
+                Console.WriteLine(dizi[i]);
+            }
+
+            Console.WriteLine(names.GetLength(0));
+            foreach (var item in names.Reverse())
+                Console.WriteLine(item);
+            Console.WriteLine(names.GetValue(0));
+            Console.WriteLine(names.IsReadOnly);
+
+            int[] numbers = { 1, 23, 3, 4, 5, 6, 7, 8, 9, 10 };
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                // int i = 0; while(a[i]<6) i++;
+                if (numbers[i] < 6)
+                    Console.WriteLine(numbers[i]);
+            }
+
+            // LINQ : Language Integrated Query (Dile Entegre Edilmiş Sorgu)
+            // Entity Framework - Ado.net
+            // Query Syntax - Metod Syntax
+            // select * from Hesaplar where ID = 63
+            // LINQ - Query 
+            var kucukSayilar = from sayi in numbers
+                               where sayi < 6
+                               select sayi;
+            foreach (var item in kucukSayilar)
+                Console.Write($"{item} ");
+
+            foreach (var item in kucukSayilar.ToList())
+                Console.Write($"{item} ");
+
+            // LINQ - Method
+            var kucukSayilar2 = numbers.Where(x => x < 6);
+            foreach (var item in kucukSayilar2)
+                Console.Write($"{item} ");
+
+            List<Course> courses = new List<Course>()
+            {
+                new Course() {Id=1, Konu="C#", Sira=1},
+                new Course() {Id=2, Konu="Linq", Sira=3},
+                new Course() {Id=3, Konu="Angular", Sira=2}
+            };
+            courses.Add(new Course() { Id = 5, Konu = "React", Sira = 5 });
+            courses.Add(new Course() { Id = 4, Konu = "C# Linq", Sira = 6 });
+
+            // Query
+            var result = from course in courses
+                         where course.Sira < 3
+                         select course;
+            foreach (var item in result)
+                Console.WriteLine($"{item.Id}. {item.Konu} - {item.Sira}");
+            var x = from course in courses where course.Konu == "C#" select course;
+            foreach (var item in x)
+                Console.WriteLine($"{item.Id}. {item.Konu} - {item.Sira}");
+
+            // Method
+            var result2 = courses.Where(x => x.Konu.Contains("C#"));
+            foreach (var item in result2)
+                Console.WriteLine($"{item.Id}. {item.Konu} - {item.Sira}");
+            */
+            #endregion     
         }
     }
+
+    class Course
+    {
+        public int Id { get; set; }
+        public string Konu { get; set; }
+        public int Sira { get; set; }
+    }
+
 }
