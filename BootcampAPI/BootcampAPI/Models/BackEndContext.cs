@@ -14,7 +14,9 @@ namespace BootcampAPI.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=KAMILKAPLAN;Database=DbBackEnd;User Id=sa;Password=1;");
+            //optionsBuilder.UseSqlServer("Server=KAMILKAPLAN;Database=DbBackEnd;User Id=sa;Password=1;");
+            optionsBuilder.UseSqlite("Data Source=DbBackEnd.db");
+
         }
     }
 }
