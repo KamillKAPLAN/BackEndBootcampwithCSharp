@@ -1,6 +1,5 @@
-﻿using BootcampAPI.Models.TPH;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace BootcampAPI.Models
 {
@@ -23,27 +22,7 @@ namespace BootcampAPI.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Fluent API
-            modelBuilder.Entity<BankaHesabi>().ToTable("BankAcount", "dbo");
-            modelBuilder.Entity<KrediKarti>().ToTable("CreeditAcount");
-
-            modelBuilder.Entity<Student>(entity => {
-                entity.ToTable("tblStudent");
-                entity.Property(e => e.Id).HasColumnName("ID");
-                entity.Property(x => x.Name).IsRequired().HasMaxLength(55);
-                entity.Property(x => x.CreatedAt).HasDefaultValue(0);
-                entity.Property(a => a.UpdatedBy).HasColumnType("datetime");
-                entity.Property(x => x.CreatedAt).HasColumnType("date").HasDefaultValue("2002-12-05");
-            });
-
-            modelBuilder.Entity<Notes>(e =>
-            {
-                //......
-            });
-
-            modelBuilder.Entity<Grade>(e =>
-            {
-                //......
-            });
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

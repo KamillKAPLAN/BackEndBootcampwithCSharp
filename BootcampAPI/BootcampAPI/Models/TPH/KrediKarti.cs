@@ -3,7 +3,7 @@
 namespace BootcampAPI.Models.TPH
 {
     [Table("CreeditAcount")]
-    public class KrediKarti : FaturaDetayi
+    public class BankaHesabi : FaturaDetayi
     {
         public int KartTipi { get; set; }
         public string SonaErmeAyi { get; set; }
