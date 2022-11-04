@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootcampAPI.Migrations
 {
     [DbContext(typeof(BackEndContext))]
-    [Migration("20221104163004_initialMSSQL")]
-    partial class initialMSSQL
+    [Migration("20221104181254_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,21 @@ namespace BootcampAPI.Migrations
                     b.ToTable("Notes");
                 });
 
+            modelBuilder.Entity("BootcampAPI.Models.Standard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StandardName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Standard");
+                });
+
             modelBuilder.Entity("BootcampAPI.Models.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -78,7 +93,8 @@ namespace BootcampAPI.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateTimeIfBirth")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date")
+                        .HasColumnName("DateOfBirth");
 
                     b.Property<int>("DeletedAt")
                         .HasColumnType("int");
@@ -100,20 +116,70 @@ namespace BootcampAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("StandardId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UpdatedAt")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedBy")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("Weight")
-                        .HasColumnType("real");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GradeId");
 
-                    b.ToTable("Students");
+                    b.HasIndex("StandardId");
+
+                    b.ToTable("StudentInfo", "tbl");
+                });
+
+            modelBuilder.Entity("BootcampAPI.Models.TPH.BankaHesabi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BankaAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FaturaAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FaturaSahibi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BankAcount");
+                });
+
+            modelBuilder.Entity("BootcampAPI.Models.TPH.KrediKarti", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FaturaAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FaturaSahibi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("KartTipi")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SonaErmeAyi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SonaErmeYili")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CreeditAcount");
                 });
 
             modelBuilder.Entity("BootcampAPI.Models.Notes", b =>
@@ -133,10 +199,23 @@ namespace BootcampAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BootcampAPI.Models.Standard", "Standard")
+                        .WithMany("Students")
+                        .HasForeignKey("StandardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Grade");
+
+                    b.Navigation("Standard");
                 });
 
             modelBuilder.Entity("BootcampAPI.Models.Grade", b =>
+                {
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("BootcampAPI.Models.Standard", b =>
                 {
                     b.Navigation("Students");
                 });

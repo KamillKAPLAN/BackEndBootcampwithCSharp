@@ -12,7 +12,6 @@ namespace BootcampAPI.Models
         public DbSet<Student> Students { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Notes> Notes { get; set; }
-        public DbSet<FaturaDetayi> FaturaDetayis { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,8 +22,28 @@ namespace BootcampAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BankaHesabi>().ToTable("BankAcount");
+            // Fluent API
+            modelBuilder.Entity<BankaHesabi>().ToTable("BankAcount", "dbo");
             modelBuilder.Entity<KrediKarti>().ToTable("CreeditAcount");
+
+            modelBuilder.Entity<Student>(entity => {
+                entity.ToTable("tblStudent");
+                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(x => x.Name).IsRequired().HasMaxLength(55);
+                entity.Property(x => x.CreatedAt).HasDefaultValue(0);
+                entity.Property(a => a.UpdatedBy).HasColumnType("datetime");
+                entity.Property(x => x.CreatedAt).HasColumnType("date").HasDefaultValue("2002-12-05");
+            });
+
+            modelBuilder.Entity<Notes>(e =>
+            {
+                //......
+            });
+
+            modelBuilder.Entity<Grade>(e =>
+            {
+                //......
+            });
         }
     }
 }
