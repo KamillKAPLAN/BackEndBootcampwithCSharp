@@ -13,6 +13,9 @@ namespace BootcampAPI.Configuration
             builder.Property(x => x.Id).HasColumnName("ID");
             builder.Property(x => x.Name).IsRequired().HasMaxLength(50).HasDefaultValue("isim alalnı boş");
             //builder.Property(x => x.CreatedAt).HasDefaultValue("");    
+            builder.HasOne<StudentAddress>(x => x.StudentAddress)
+                .WithOne(x => x.Student)
+                .HasForeignKey<StudentAddress>(x => x.StudentAddressId);
         }
     }
 }
