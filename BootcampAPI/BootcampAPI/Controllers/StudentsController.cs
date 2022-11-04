@@ -1,7 +1,9 @@
 ﻿using BootcampAPI.Models;
+using BootcampAPI.Models.TPH;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BootcampAPI.Controllers
@@ -19,9 +21,12 @@ namespace BootcampAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Student>>> GetAllStudent()
+        public async Task<ActionResult<IEnumerable<BankaHesabi>>> GetAllStudent()
         {
-            return await _context.Students.ToListAsync();
+            IQueryable<BankaHesabi> students = from student in _context.FaturaDetayis.OfType<BankaHesabi>()
+                                           select student;
+
+            return await students.ToListAsync();
         }
     }
 }

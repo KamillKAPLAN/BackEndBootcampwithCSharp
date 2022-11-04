@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BootcampAPI.Migrations
 {
-    public partial class initialDB : Migration
+    public partial class initialMSSQL : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,10 +11,10 @@ namespace BootcampAPI.Migrations
                 name: "Grades",
                 columns: table => new
                 {
-                    GradeId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    GradeName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                    Section = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true)
+                    GradeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GradeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Section = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -25,20 +25,20 @@ namespace BootcampAPI.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    DateTimeIfBirth = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Height = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Weight = table.Column<float>(type: "REAL", nullable: false),
-                    CreatedAt = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreatedBy = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdatedAt = table.Column<int>(type: "INTEGER", nullable: false),
-                    UpdatedBy = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DeletedAt = table.Column<int>(type: "INTEGER", nullable: false),
-                    DeletedBy = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    GradeId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DateTimeIfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Height = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Weight = table.Column<float>(type: "real", nullable: false),
+                    CreatedAt = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<int>(type: "int", nullable: false),
+                    UpdatedBy = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<int>(type: "int", nullable: false),
+                    DeletedBy = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    GradeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,11 +55,11 @@ namespace BootcampAPI.Migrations
                 name: "Notes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Note1 = table.Column<int>(type: "INTEGER", nullable: false),
-                    Note2 = table.Column<int>(type: "INTEGER", nullable: false),
-                    StudentId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Note1 = table.Column<int>(type: "int", nullable: false),
+                    Note2 = table.Column<int>(type: "int", nullable: false),
+                    StudentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
