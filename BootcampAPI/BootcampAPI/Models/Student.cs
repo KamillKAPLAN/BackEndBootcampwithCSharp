@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BootcampAPI.Models
 {
-    [Table("StudentInfo", Schema = "tbl")]
+    //[Table("StudentInfo", Schema = "tbl")]
 
     public class Student
     {
@@ -37,5 +37,7 @@ namespace BootcampAPI.Models
         public int StandardId { get; set; }
         public Standard Standard { get; set; }
         public ICollection<Notes> Notes { get; set; }
+
+        public StudentAddress StudentAddress { get; set; }
     }
 }

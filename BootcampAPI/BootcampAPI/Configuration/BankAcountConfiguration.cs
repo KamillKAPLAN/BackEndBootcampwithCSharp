@@ -8,7 +8,7 @@ namespace BootcampAPI.Configuration
     {
         public void Configure(EntityTypeBuilder<BankaHesabi> builder)
         {
-            throw new System.NotImplementedException();
+            builder.HasKey(x => x.Id);
         }
     }
 }

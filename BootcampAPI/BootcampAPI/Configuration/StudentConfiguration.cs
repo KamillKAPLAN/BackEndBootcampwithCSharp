@@ -12,7 +12,7 @@ namespace BootcampAPI.Configuration
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasColumnName("ID");
             builder.Property(x => x.Name).IsRequired().HasMaxLength(50).HasDefaultValue("isim alalnı boş");
-            builder.Property(x => x.CreatedAt).HasDefaultValue("");    
+            //builder.Property(x => x.CreatedAt).HasDefaultValue("");    
         }
     }
 }
