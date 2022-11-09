@@ -1,4 +1,4 @@
-using BootcampAPI.Models;
+﻿using BootcampAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +26,9 @@ namespace BootcampAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BootcampAPI", Version = "v1" });
             });
+            // services.AddSingleton(); // 
+            // services.AddScoped();    // talepte özel bir nesne üretir.
+            // services.AddTransient(); // her talepte yeni bir nesne üretmemi sağlıyor.
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
