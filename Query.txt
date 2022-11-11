@@ -1,0 +1,31 @@
+/* IN - NOT IN */
+select * from Customers
+--where Country = 'Germany'
+-- where Country in ('Germany', 'Mexico', 'UK')
+where Country not in ('Germany', 'Mexico', 'UK', 'USA', 'Brazil')
+
+/* Between - Not Between */
+select * from Products
+-- where Price Between 15 and 20 and CategoryId not in (1,2,3)
+where Name not Between 'Alice Mutton' and 'Chang'
+order by Name
+
+/* Like - Not Like */
+select * from Products
+-- where Name Like 'A%'
+--where TRIM(Name) Like '%A'
+--where TRIM(Name) Like '%ert%'
+--where TRIM(Name) Like '_h%'
+--where TRIM(Name) Like 'C_____%'
+--where TRIM(Name) Like 'C%S'
+where TRIM(Name) Not Like 'A%'
+
+CREATE PROCEDURE sp_xx @List varchar(max)
+AS
+BEGIN
+  select * from Customers where City in (
+    SELECT value FROM STRING_SPLIT(@List, ',')
+  )
+END
+GO
+EXEC sp_xx @List = 'Berlin,London';
